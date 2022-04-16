@@ -1,0 +1,97 @@
+<%-include('header')%>
+    <div class="shadow p-3 mb-5 bg-white rounded" id="head">
+        <h1>
+            TODO</h1>
+        <form action="/todo" method="POST">
+
+            <input type="text" name="todo" id="todo" placeholder="Enter Todo" required>
+            <!-- 
+            <div class="form-check">
+                <label class="form-check-label" for="flexCheckDefault"> <h6>Complete Status</h6></label>
+                <input class="form-check-input" type="checkbox" value="checked" name="status" id="flexCheckDefault" checked>
+
+            </div> -->
+            <button type="submit" class="btn-sm btn-success">Add</button>
+
+        </form>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card shadow p-3 mb-5 bg-white rounded">
+                <div class="card-body">
+                    <h5 class="card-title">Todo List</h5>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Todo</th>
+                                <th scope="col">Edit</th>
+                                <th scope="col">Delete</th>
+                                <th scope="col">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for (let todo of newtodo ) { %>
+
+                                <tr>
+                                    <td scope="row">
+                                        <% if(todo.status == "checked"){ %>
+                                            <a href="/todo/<%= todo.id %>" class="btn  text-decoration-line-through">
+                                                <h5>
+                                                    <%= todo.todo %>
+                                                </h5>
+
+                                            </a>
+                                            <%}else{ %>
+                                                <a href="/todo/<%= todo.id %>" class="btn ">
+                                                    <h5>
+                                                        <%= todo.todo %>
+                                                    </h5>
+
+                                                </a>
+                                                <% } %>
+                                    </td>
+                                    <td>
+
+                                        <a href="/todo/<%=todo._id%>/edit" class="btn btn-success"><img src="edit.png" alt=""></a>
+                                    </td>
+                                    <td>
+                                        <form action="/todo/<%=todo._id%>/delete?_method=DELETE" method="POST">
+                                            <button class="btn-sm btn-danger"><img src="del.png"></button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <% if(todo.status == "checked") {%>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="checked" name="status" id="flexCheckDefault" <%=todo.status%> disabled>
+
+                                                <h6>Completed</h6>
+
+                                            </div>
+                                            <% }else{ %>
+
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="" name="status" id="flexCheckDefault" disabled>
+                                                    <h6>Incompleted
+                                                    </h6>
+
+                                                </div>
+
+
+                                                <% } %>
+                                    </td>
+                                </tr>
+
+                                <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <lottie-player src="https://assets3.lottiefiles.com/datafiles/ogIQ10UnwnKiBZS/data.json" background="transparent" speed="1" style="width: 300px; height: 300px; margin-left:800px; margin-top:-350px; margin-bottom:300px;" loop autoplay></lottie-player>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <lottie-player src="https://assets6.lottiefiles.com/packages/lf20_i3mq3e9v.json" background="transparent" speed="1" style="width: 300px; height: 300px;  margin-right:800px; margin-top:-600px; margin-bottom:300px;" loop autoplay></lottie-player>
+    <%-include( 'footer')-%>
